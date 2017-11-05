@@ -15,6 +15,6 @@ app.use(bodyParser.json());
 app.use('/products', productsRoutes);
 
 app.get('*', (req, res) => {
-    res.end('Echo server...');
+    res.end('Express server...');
 })
 export default app;
