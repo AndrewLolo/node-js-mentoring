@@ -1,7 +1,10 @@
 import express from 'express';
 import productsController from 'controllers/products-controller';
+import jwtVerification from 'middleware/jwt-verification';
 
 const productsRouter = express.Router();
+
+productsRouter.use(jwtVerification);
 
 productsRouter.route('/')
     .get(productsController.getProducts)

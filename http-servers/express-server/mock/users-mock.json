@@ -1,0 +1,14 @@
+[
+    {
+        "name": "Andrew",
+        "login": "AndrewLogin",
+        "password": "password1",
+        "fbId": "YOUR_FB_ID",
+        "googleId": "YOUE_GOOGLE_EMAIL"
+    },
+    {
+        "name": "John",
+        "login": "JohnLogin",
+        "password": "password2"
+    }
+]
