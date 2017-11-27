@@ -1,3 +1,4 @@
 {
-    "port": 8080   
+    "port": 8080,
+    "db_uri": "mongodb://admin:admin@ds123146.mlab.com:23146/node-mentoring"
 }

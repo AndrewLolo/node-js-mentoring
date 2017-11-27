@@ -1,11 +1,11 @@
-import usersMock from 'mock/users-mock';
+import mongoose from 'mongoose';
 
-function getUserByKey(key, value) {
-    return usersMock.find((user) => user[key] === value);
-}
+const userSchema = new mongoose.Schema({
+  name: String,
+  login: String,
+  password: String,
+  fbId: String,
+  googleId: String
+});
 
-function addUser(user) {
-    usersMock.push(user);
-}
-
-export default {getUserByKey, addUser};
+export default mongoose.model('Users', userSchema);

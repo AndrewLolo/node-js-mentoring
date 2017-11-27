@@ -1,5 +1,6 @@
 import express from 'express';
 import 'authentication';
+import 'db';
 
 import bodyParser from 'body-parser';
 import cookieParser from 'middleware/cookie-parser';
@@ -18,6 +19,6 @@ app.use('/products', productsRoutes);
 app.use('/auth', authRoutes);
 
 app.get('*', (req, res) => {
-    res.end('Express server...');
+  res.end('Express server...');
 });
 export default app;

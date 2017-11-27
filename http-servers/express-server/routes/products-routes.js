@@ -7,8 +7,8 @@ const productsRouter = express.Router();
 productsRouter.use(jwtVerification);
 
 productsRouter.route('/')
-    .get(productsController.getProducts)
-    .post(productsController.addProduct);
+  .get(productsController.getProducts)
+  .post(productsController.addProduct);
 
 productsRouter.get('/:id', productsController.getProduct);
 productsRouter.get('/:id/reviews', productsController.getProductReviews);

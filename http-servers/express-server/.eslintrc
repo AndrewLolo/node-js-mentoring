@@ -1,0 +1,9 @@
+{
+    "extends": "airbnb-base",
+    "rules" :{
+        "import/no-extraneous-dependencies": "false",
+        "import/no-unresolved": "false",
+        "import/extensions": "false",
+        "comma-dangle": ["error", "never"]
+    }
+}
