@@ -13,11 +13,7 @@ passport.use(new Strategy(
   },
   ((accessToken, refreshToken, profile, done) => {
     usersModel.findOne({ fbId: profile.id })
-      .exec((err, user) => {
-        if (!user) {
-          return done(null, false, { message: 'Not Found' });
-        }
-        return done(null, user);
-      });
+      .then(user => (user ? done(null, user) : Promise.reject()))
+      .catch(() => done(null, false, { message: 'Not Found' }));
   })
 ));

@@ -4,7 +4,7 @@ const secretKey = 'secret';
 
 function authUser(req, res) {
   const { user } = req;
-  const token = jwt.sign(user, secretKey);
+  const token = jwt.sign(JSON.stringify(user), secretKey);
   const responseData = {
     message: 'OK',
     data: { userName: user.name },

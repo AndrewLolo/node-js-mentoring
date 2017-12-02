@@ -9,11 +9,8 @@ passport.use(new Strategy(
   },
   ((username, password, done) => {
     usersModel.findOne({ login: username })
-      .exec((err, user) => {
-        if (!user || user.password !== password) {
-          return done(null, false, { message: 'Not Found' });
-        }
-        return done(null, user);
-      });
+      .select('login password')
+      .then(user => (!user || user.password !== password ? Promise.reject() : done(null, user)))
+      .catch(() => done(null, false, { message: 'Not Found' }));
   })
 ));

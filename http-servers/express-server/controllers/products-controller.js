@@ -1,29 +1,39 @@
 import productsModel from 'models/products-model';
 
+
 function getProducts(req, res) {
-  const products = productsModel.getProducts();
-  res.json(products);
+  return productsModel.find()
+    .then(products => res.json(products))
+    .catch(() => res.sendStatus(404));
 }
 
 function getProduct(req, res) {
-  const { id } = req.params;
-  const product = productsModel.getProduct(id);
-  return product ? res.json(product) : res.sendStatus(404);
+  return productsModel.findOne({ _id: req.params.id })
+    .then(product => (product ? res.json(product) : Promise.reject()))
+    .catch(() => res.sendStatus(404));
 }
 
 function getProductReviews(req, res) {
-  const { id } = req.params;
-  const productReviews = productsModel.getProductReviews(id);
-  return productReviews ? res.json(productReviews) : res.sendStatus(404);
+  return productsModel.findOne({ _id: req.params.id })
+    .select('reviews')
+    .then(review => res.json(review))
+    .catch(() => res.sendStatus(404));
 }
 
 function addProduct(req, res) {
   const newProduct = req.body;
-  const addedProduct = productsModel.addProduct(newProduct);
-  return res.json(addedProduct);
+  return productsModel.create(newProduct)
+    .then(addedProduct => res.json(addedProduct))
+    .catch(() => res.sendStatus(422));
+}
+
+function deleteProduct(req, res) {
+  return productsModel.deleteOne({ _id: req.params.id })
+    .then(() => res.sendStatus(200))
+    .catch(() => res.sendStatus(404));
 }
 
 
 export default {
-  getProducts, getProduct, getProductReviews, addProduct
+  getProducts, getProduct, getProductReviews, addProduct, deleteProduct
 };
