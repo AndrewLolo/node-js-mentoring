@@ -1,4 +1,6 @@
 import mongoose from 'mongoose';
+import addTimestampDocument from 'db/middleware/document/timestamp';
+import addTimestampQuery from 'db/middleware/query/timestamp';
 
 const citiesSchema = new mongoose.Schema({
   name: String,
@@ -8,16 +10,7 @@ const citiesSchema = new mongoose.Schema({
   lastModifiedDate: Date
 });
 
-citiesSchema.pre('update', (next) => {
-  console.log('here');
-  this.update({ $set: { lastModifiedDate: new Date() } });
-  next();
-});
-
-citiesSchema.pre('save', (next) => {
-  console.log(this);
-  this.update({ $set: { lastModifiedDate: new Date() } });
-  next();
-});
+citiesSchema.pre('update', addTimestampQuery);
+citiesSchema.pre('save', addTimestampDocument);
 
 export default mongoose.model('Cities', citiesSchema);

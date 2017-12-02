@@ -1,4 +1,4 @@
-import usersModel from 'models/users-model';
+import UsersModel from 'models/users-model';
 import passport from 'passport';
 import { Strategy } from 'passport-facebook';
 
@@ -12,7 +12,7 @@ passport.use(new Strategy(
     callbackURL: 'http://localhost:8080/auth/facebook/callback'
   },
   ((accessToken, refreshToken, profile, done) => {
-    usersModel.findOne({ fbId: profile.id })
+    UsersModel.findOne({ fbId: profile.id })
       .then(user => (user ? done(null, user) : Promise.reject()))
       .catch(() => done(null, false, { message: 'Not Found' }));
   })
